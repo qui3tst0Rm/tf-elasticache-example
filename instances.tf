@@ -94,13 +94,13 @@ resource "aws_elasticache_subnet_group" "redis-cluster-subnet" {
   subnet_ids = [aws_subnet.private_1.id]
 }
 
-resource "aws_elasticache_security_group" "redis-cluster-sec-gp" {
+/*resource "aws_elasticache_security_group" "redis-cluster-sec-gp" {
   name = "elasticache-security-group"
   security_group_names = [aws_security_group.group_3.name]
   //security_group_ids = aws_security_group.group_3.id
   //security_group_names = ["sec_group_3"]
 
-}
+}*/
 
 ##### Redis Cluster with cluster mode disabled #####
 resource "aws_elasticache_cluster" "swagger_app_redis_cluster" {
@@ -112,8 +112,8 @@ resource "aws_elasticache_cluster" "swagger_app_redis_cluster" {
   engine_version = "5.0.6"
   port = 6379
   subnet_group_name = "elasticache-private-subnet"
-  //subnet_group_name = [aws_elasticache_subnet_group.redis-cluster-subnet.name]
-  security_group_names = [aws_elasticache_security_group.redis-cluster-sec-gp.name]
+  //security_group_names = [aws_elasticache_security_group.redis-cluster-sec-gp.name]
+  security_group_ids = [aws_security_group.group_3.id]
 }
 
 
