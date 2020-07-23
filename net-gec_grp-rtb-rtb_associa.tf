@@ -65,6 +65,14 @@ resource "aws_route_table_association" "route-A-pub" {
   route_table_id = aws_route_table.routetb_A_public.id
 }
 
+# Swagger app route table association
+resource "aws_route_table_association" "route-B-pub" {
+  subnet_id      = aws_subnet.public_2.id
+  route_table_id = aws_route_table.routetb_A_public.id
+}
+
+/*Redis route table association not required with be 
+implicitly associated to default with no internet access*/
 
 
 ##############################################
@@ -120,6 +128,68 @@ resource "aws_security_group" "group_1" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = -1
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+##### Sec group for Swagger app #####
+resource "aws_security_group" "group_2" {
+  name        = "sec_group_2"
+  description = "sec group for swagger app"
+  vpc_id      = aws_vpc.swagger_api_vpc.id
+
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    #uncomment below cidr_block and set to your ip address then comment out above cidr_block to restrict access to your address only !
+    #cidr_blocks = ["0.0.0.0/0"] 
+
+  }
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = -1
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+##### Sec group for Redis Cluster#####
+resource "aws_security_group" "group_3" {
+  name        = "sec_group_3"
+  description = "sec group for redis cluster"
+  vpc_id      = aws_vpc.swagger_api_vpc.id
+
+  ingress {
+    from_port   = 6379
+    to_port     = 6379
+    protocol    = "tcp"
+    cidr_blocks = [var.swagger-app-subnet-cidr]
+    #uncomment below cidr_block and set to your ip address then comment out above cidr_block to restrict access to your address only !
+    #cidr_blocks = ["0.0.0.0/0"] 
+
+  }
+
+  /*ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }*/
 
   egress {
     from_port   = 0
