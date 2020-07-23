@@ -10,7 +10,7 @@ pipeline{
         stage ('scm checkout') {
             steps {
 	            echo 'retrieving code form scm'
-                git 'https://github.com/qui3tst0Rm/elasticache-sample.git'
+                git 'https://github.com/qui3tst0Rm/tf-elasticache-example.git'
 	            echo 'code retrivial from scm complete'
             }
         }
@@ -74,6 +74,7 @@ pipeline{
                 terraform output -json app_server_private_ips3 | jq '."Blue-Box"' --raw-output > /var/lib/jenkins/env_vars/Blue_Box_ip.txt                
                 terraform output -json app_server_private_ips3 | jq '."Red-Box"' --raw-output > /var/lib/jenkins/env_vars/Red_Box_ip.txt*/
             }
+        }
 
 
 
