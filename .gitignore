@@ -1,0 +1,9 @@
+.terraform
+terraform.tfstate
+terraform.tfstate.backup
+.git
+hnginxConfig.txt
+jenkinsfile1
+jenkinsfile2
+jenkinsfile*
+myplan
