@@ -55,9 +55,16 @@ pipeline{
                     writeFile(file:'/var/lib/jenkins/env_vars/Elacticache_Config_Endpoint.txt', text: 'TBC')
                     writeFile(file:'/var/lib/jenkins/env_vars/Elasticache_Nodes.txt', text: 'TBC')                 
                 }
+                
                 sh '''
-                sudo chown jenkins:jenkins /var/lib/jenkins/env_vars/Swagger_Box_ip.txt
-                sudo chmod 600 /var/lib/jenkins/env_vars/Swagger_Box_ip.txt
+                sudo chown jenkins:jenkins /var/lib/jenkins/env_vars/Swagger_Private_ip.txt
+                sudo chmod 600 /var/lib/jenkins/env_vars/Swagger_Private_ip.txt
+                sudo chown jenkins:jenkins /var/lib/jenkins/env_vars/Elasticache_Address.txt
+                sudo chmod 600 /var/lib/jenkins/env_vars/Elasticache_Address.txt
+                sudo chown jenkins:jenkins /var/lib/jenkins/env_vars/Elacticache_Config_Endpoint.txt
+                sudo chmod 600 /var/lib/jenkins/env_vars/Elacticache_Config_Endpoint.txt
+                sudo chown jenkins:jenkins /var/lib/jenkins/env_vars/Elasticache_Nodes.txt
+                sudo chmod 600 /var/lib/jenkins/env_vars/Elasticache_Nodes.txt
                 '''
             }
         }
