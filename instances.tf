@@ -40,6 +40,7 @@ resource "aws_instance" "jenkins-server" {
       "sudo unzip terraform_0.12.26_linux_amd64.zip -d /usr/bin",
       "sudo echo 'export PATH=/usr/bin/terraform:$PATH' >> ~/.bashrc",
       "sudo mkdir /var/lib/jenkins/env_vars",
+      "sudo chown jenkins:jenkins /var/lib/jenkins/env_vars",
       "sudo usermod --shell /bin/bash jenkins",
       "sudo usermod -aG wheel jenkins",
       "sudo systemctl enable jenkins",
