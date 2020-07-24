@@ -2,10 +2,10 @@
 ##              Internet Gateway            ##
 ##############################################
 resource "aws_internet_gateway" "swagger-gw" {
-    vpc_id = aws_vpc.swagger_api_vpc.id
-    tags = {
-        Name = "swagger-app-igw"
-    }
+  vpc_id = aws_vpc.swagger_api_vpc.id
+  tags = {
+    Name = "swagger-app-igw"
+  }
 }
 
 ##############################################

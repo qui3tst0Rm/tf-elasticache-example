@@ -1,20 +1,20 @@
 # Create ec2-instance for jenkins server
 resource "aws_instance" "jenkins-server" {
-  ami = var.ec2-ami
-  instance_type = "t2.micro"
-  key_name = var.key_name
-  subnet_id = aws_subnet.public_1.id
+  ami                    = var.ec2-ami
+  instance_type          = "t2.micro"
+  key_name               = var.key_name
+  subnet_id              = aws_subnet.public_1.id
   vpc_security_group_ids = local.sg1
 
-    tags = {
+  tags = {
     Name = "jenkins-server"
   }
 
   connection {
-    type = "ssh"
-    user = "ec2-user"
+    type        = "ssh"
+    user        = "ec2-user"
     private_key = file(var.private_key)
-    host = self.public_ip
+    host        = self.public_ip
   }
 
   provisioner "remote-exec" {

@@ -13,16 +13,16 @@ variable "jenkins-subnet-cidr" {
 }
 
 variable "ec2-ami" {
-  default = "ami-032598fcc7e9d1c7a"
+  default     = "ami-032598fcc7e9d1c7a"
   description = "Amazon ami id"
 }
 
 variable "key_name" {
-  default = "terraform2"
+  default     = "terraform2"
   description = "Key name"
 }
 
 variable "private_key" {
-  default = "~/.ssh/terraform2.pem"
+  default     = "~/.ssh/terraform2.pem"
   description = "open door"
 }
