@@ -33,3 +33,4 @@ output "elasticache_config_endpoint" {
 output "elastic_cache_nodes" {
     value = aws_elasticache_cluster.swagger_app_redis_cluster.cache_nodes
 }
+
